@@ -6,9 +6,9 @@ const app = express();
 const path = require('path');
 
 var jsonData = {count: 12, message: 'hey'};
-console.log(__dirname);
+// SendFile requires absolute path
 app.get('/', (req, res)=> res.sendFile(path.join(__dirname+'/index.html')));
 app.get('/data', (req, res)=> res.json(jsonData));
-app.listen(3000, ()=> console.log('hey'));
+app.listen(3000, ()=> console.log('listening...'));
 
 
