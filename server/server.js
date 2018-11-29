@@ -14,14 +14,53 @@ app.use(express.static('client'));
 
 // body parser makes it possible to post JSON to the server
 // we can accss data we post on as req.body
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 
 var lions = [];
 var id = 0;
 
 // TODO: make the REST routes to perform CRUD on lions
-
+app.get('/lions', function(req, res) {
+  res.json(lions);
+});
+app.get('/lions/:id', function(req, res) {
+  var lion = _.find(lions, { id: req.params.id });
+  res.json(lion || {});
+});
+app.post('/lions', function(req, res) {
+  var lion = req.body;
+  id++;
+  lion.id = id + '';
+  lions.push(lion);
+  res.json(lion);
+});
+app.put('/lions/:id', function(req, res) {
+  var update = req.body;
+  // Safety to make siure you don't update id
+  if (update.id) {
+    delete update.id;
+  }
+  var lion = _.findIndex(lions, { id: req.params.id });
+  if (!linos[lion]) {
+    res.send();
+  } else {
+    // Merge two objects with assign
+    _.assi
+    var updatedLion = _.assign(lions[lion], update);
+    res.json(updatedLion);
+  }
+  res.json(lion);
+});
+app.delete('/lions/:id', function(req, res) {
+  var lion = _.findIndex(lions, { id: req.params.id });
+  if (!linos[lion]) {
+    res.send();
+  } else {
+    var delLion = lions[lion];
+    lions.splice(lion, 1);
+    res.json(delLion);
+  }
+});
 app.listen(3000);
 console.log('on port 3000');
