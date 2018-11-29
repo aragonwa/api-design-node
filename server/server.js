@@ -3,7 +3,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-var _ = require('lodash');
+
 var morgan = require('morgan');
 
 var lionRouter = require('./lions');
@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 // this is called mounting. when ever a req comes in for
 // '/lion' we want to use this router
 app.use('/lions', lionRouter);
+app.use('/tigers', tigerRouter);
 
 app.use(function(err, req, res, next) {
   if (err) {
