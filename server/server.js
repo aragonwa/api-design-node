@@ -23,5 +23,5 @@ app.use(function(err, req, res, next) {
 });
 
 
-
+// Export app to other services, like testing
 module.exports = app;
